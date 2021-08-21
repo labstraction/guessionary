@@ -1,18 +1,15 @@
 // use std::fs::File;
 // use std::io::Write;
 
-static HOST_FILE: &'static str = include_str!("../assets/ita.txt");
+mod modules;
+
+
+use modules::{game_logic::new_game};
 
 
 fn main() {
 
-    let lines: Vec<(usize, &str)> = HOST_FILE.split(",").enumerate().collect();
-
-
-    for line in lines {
-        print!("{} - {} \n", line.0, line.1)
-    }
-
+    new_game("ita");
     
 }
 
