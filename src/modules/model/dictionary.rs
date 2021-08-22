@@ -1,8 +1,8 @@
 
 use rand::Rng;
-use super::model::Word;
+use super::word::Word;
 
-static ITA_DICT: &'static str = include_str!("../../assets/ita.txt");
+static ITA_DICT: &'static str = include_str!("../../../assets/ita.txt");
 
 fn select_dict(country: &str) -> &str{ITA_DICT}
 
