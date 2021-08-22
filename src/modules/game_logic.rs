@@ -1,17 +1,24 @@
 
-use super::dict_selector::get_dict;
+use crate::modules::model::Status;
 
-use rand::Rng;
+use super::{dictionary::Dictionary, model::{GameHistory, Word}};
 
-pub fn select_word(dict: Vec<(i32, &str)>) -> (i32, &str) {
-    dict[rand::thread_rng().gen_range(0..dict.len())]
-}
 
 
 
 pub fn new_game(country: &str){
-    let dict = get_dict(country);
-    let selected_word = select_word(dict);
+    let dict = Dictionary::new(country);
 
-    println!("{}", selected_word.1);
+    let mut hist = GameHistory::new();
+
+    let mut _actualStatus = Status::new(dict.get_top_word().unwrap(), dict.get_bottom_word().unwrap());
+
+    let (old, new) = _actualStatus.nextStatus(Word::new("pippo", -1));
+
+    hist.record(old);
+
+    _actualStatus = new;
+
+    print!("{:?}", hist)
 }
+
