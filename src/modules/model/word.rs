@@ -1,19 +1,12 @@
 
 
-#[derive(Copy, Clone, Debug)]
-pub struct Word<'a> {
-    text: &'a str,
+#[derive(Clone, Debug)]
+pub struct Word{
+    text: String,
     position: i32
 }
 
-impl<'a> Word<'a>{
-    pub fn new(text: &str, position: i32) -> Word {
-        Word{
-            text,
-            position
-        }
-    }
-
+impl Word{
     pub fn text(&self) -> &str {
         &self.text
     }
@@ -23,5 +16,11 @@ impl<'a> Word<'a>{
     }
 }
 
-////////////
+pub fn new_word(text: &str, position: i32) -> Word {
+    Word{
+        text: String::from(text),
+        position
+    }
+}
+
 

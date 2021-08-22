@@ -1,38 +1,39 @@
 use super::word::Word;
 
-#[derive(Copy, Clone, Debug)]
-pub struct Status<'a>  {
-    top_word: Word<'a>,
-    guess_word: Option<Word<'a>>,
-    bottom_word: Word<'a>
+#[derive(Clone, Debug)]
+pub struct Status  {
+    top_word: Word,
+    guess_word: Option<Word>,
+    bottom_word: Word
 }
 
-impl<'a> Status<'a>{
-    pub fn new(top: Word<'a>, bottom: Word<'a>) -> Status<'a> {
-        Status{
-            top_word: top,
-            bottom_word: bottom,
-            guess_word: None
-        }
+impl Status{
+
+    pub fn get_top(&self) -> &Word {&self.top_word}
+    pub fn get_bottom(&self) -> &Word {&self.bottom_word}
+
+}
+
+pub fn new_status(top_word:Word, bottom_word:Word) -> Status{
+    Status{
+        top_word,
+        bottom_word,
+        guess_word: None
     }
+}
 
-    pub fn get_top(self) -> Word<'a> {self.top_word}
-    pub fn get_bottom(self) -> Word<'a> {self.bottom_word}
+pub fn next_status(status: Status, guess: Word) -> (Status, Status){
+    let old = Status{
+        top_word: status.top_word.clone(),
+        bottom_word: status.bottom_word.clone(),
+        guess_word: Some(guess)
+    };
 
+    let new = Status{
+        top_word: status.top_word,
+        bottom_word: status.bottom_word,
+        guess_word: None
+    };
 
-    pub fn next_status(self, guess: Word<'a>) -> (Status<'a>, Status<'a>){
-        let old = Status{
-            top_word: self.top_word,
-            bottom_word: self.bottom_word,
-            guess_word: Option::Some(guess)
-        };
-
-        let new = Status{
-            top_word: self.top_word,
-            bottom_word: self.bottom_word,
-            guess_word: None
-        };
-
-        (old, new)
-    }
+    (old, new)
 }

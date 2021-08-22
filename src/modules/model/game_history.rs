@@ -1,18 +1,27 @@
 use super::status::Status;
 
-#[derive(Debug)]
-pub struct GameHistory<'a>  {
-    history: Vec<Status<'a>>
+#[derive(Clone, Debug)]
+pub struct GameHistory {
+    records: Vec<Status>
 }
 
-impl<'a> GameHistory<'a>{
-    pub fn new() -> GameHistory<'a> {
-        GameHistory{
-            history: vec![]
-        }
-    }
-
-    pub fn record(&mut self, status: Status<'a>){
-        self.history.push(status);
+impl GameHistory{
+    pub fn records(&self) -> &Vec<Status>{
+        &self.records
     }
 }
+
+
+pub fn new_history() -> GameHistory {
+    GameHistory{
+        records: vec![]
+    }
+}
+
+
+pub fn record_status(mut history: GameHistory, status: Status) -> GameHistory{
+    history.records.push(status);
+    history
+}
+
+
