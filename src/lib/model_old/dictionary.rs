@@ -4,7 +4,7 @@ use super::word::Word;
 
 static ITA_DICT: &'static str = include_str!("../../../assets/ita.txt");
 
-fn select_dict(country: &str) -> &str{ITA_DICT}
+fn select_dict(language: &str) -> &str{ITA_DICT}
 
 #[derive(Copy, Clone, Debug)]
 pub struct Dictionary<'a>{
@@ -13,9 +13,9 @@ pub struct Dictionary<'a>{
 
 impl<'a> Dictionary<'a>{
 
-    pub fn new(country: &str) -> Dictionary{
+    pub fn new(language: &str) -> Dictionary{
         Dictionary{
-            words: select_dict(country)
+            words: select_dict(language)
         }
     }
 

@@ -4,7 +4,12 @@ use super::word::{self, Word};
 
 static ITA_DICT: &'static str = include_str!("../../../assets/ita.txt");
 
-fn select_dict(country: &str) -> &str{ITA_DICT}
+fn select_dict(language: &str) -> &str{
+    if language == "ITA" {
+        return ITA_DICT;
+    }
+    ITA_DICT
+}
 
 #[derive(Clone, Debug)]
 pub struct Dictionary<'a>{
@@ -12,9 +17,9 @@ pub struct Dictionary<'a>{
 }
 
 
-pub fn new_dictionary(country: &str) -> Dictionary{
+pub fn new_dictionary(language: &str) -> Dictionary{
     Dictionary{
-        words: select_dict(country)
+        words: select_dict(language)
     }
 }
 
@@ -41,10 +46,12 @@ pub fn get_bottom_word(dictionary: &Dictionary) -> Word{
     all_words[all_words.len() - 1].clone()
 }
 
-pub fn find_word(dictionary: Dictionary, text: &str) -> Option<Word>{
+pub fn find_word(dictionary: &Dictionary, text: &str) -> Option<Word>{
     dictionary.words.split(",")
                     .enumerate()
                     .map(|(u,s)| word::new_word(s, u as i32))
                     .find(|w|w.text() == text)
 
 }
+
+
