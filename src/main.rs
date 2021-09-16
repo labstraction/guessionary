@@ -18,10 +18,10 @@ fn main() {
 
     let language = matches.value_of("Language").unwrap_or("ITA");
 
-    let _difficulty = matches.value_of("difficulty").unwrap_or("NORMAL");
+    let difficulty = matches.value_of("difficulty").unwrap_or("NORMAL");
     
 
-    new_game(language);
+    new_game(language, difficulty);
     
 }
 
